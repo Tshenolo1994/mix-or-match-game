@@ -1,0 +1,300 @@
+
+html {
+    /* Includes padding and border in elements' total width https://ibb.co/jBj9xdand height */
+      box-sizing: border-box;
+  }
+  
+  *,
+  *::before,
+  *::after {
+      box-sizing: inherit;
+      transition: all .6s ease; 
+  }
+  html{
+      min-height:100vh;
+  }
+  html,
+  body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: #f8f5f0;
+      font-family: 'Play', sans-serif;
+      text-transform: uppercase;
+    /* Removes scroll bar, prevents page scrolling TODO: ensure compatible with other screen sizes */
+  /*   Disabled for CodePen due to its fixed bar at top */
+  /*   overflow: hidden; */
+  }
+  .page-title{
+      columns: #171717;
+      font-weight:900;
+      text-align: center;
+      font-size:6em;
+  }
+  .game-info{
+    columns: #171717;
+    font-size: 2.8em;
+  }
+  .game-info-container{
+      grid-column: 1/-1;
+      display:flex;
+      justify-content: space-between;
+  }
+  .game-container{
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+      grid-gap:10px;
+      margin:50px;
+      justify-content: center;
+      perspective: 500px ;
+  }
+  .card{position: relative;
+     
+    height:150px;
+    width:150px;
+      border-radius: 0;
+      border-width: 1px;
+      cursor: pointer;
+      background-color:  #f8f5f0;
+  }
+  .card-face{
+      position: absolute;
+      width:100%;
+      height:100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      backface-visibility: hidden;
+      transition: transform 500ms ease-in-out;
+     
+      
+  }
+  .card-front{
+      transform:rotateY(180deg)
+  }
+.card-value{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    transform: scale(1.2); 
+    transition: transform 100ms ease-in-out;
+}
+  .card-front:hover .card-value{
+      transform: scale(1.3);
+  }
+  .card-back{
+    background-color:black;
+  }
+  .card.visible .card-back{
+      transform: rotateY(-180deg);
+  }
+  .card.card.visible .card-front{
+    transform: rotateY(0);
+}
+.card.matched .card-value{
+animation: dance 1s linear 2 500ms;
+
+}
+.overlay-text{
+visibility: hidden;
+    position: fixed;
+    top:0;
+  left:0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  color:#f8f5f0;
+  cursor:  pointer;
+}
+.overlay-text-small{
+    font-size:.3em;
+  
+}
+.overlay-text.visible{
+    display: flex;
+    flex-direction: column;
+    animation: overlay-grow 500ms forwards;
+ 
+  
+}
+@keyframes overlay-grow{
+from{
+    background-color: rgba(0,0,0,0);
+    font-size:0;
+}
+to{
+background-color: rgba(0,0,0,.9);
+font-size:8.5em;
+}
+}
+ @keyframes dance{
+     0%, 100%{
+         transform: rotate(0);
+     }
+     25%{
+         transform: rotate(-30deg);
+     }
+     75%{
+        transform: rotate(30deg);
+     }
+ }
+  .logo{
+    position: absolute;
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      transform: translateY(0);
+      transition: transform 100ms ease-in-out;
+  }
+  .card-back:hover .logo{
+    transform: translateY(-10px);
+  }
+.footer{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top:10%;
+}
+/*
+
+@media only screen and (max-width: 568px){
+
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+
+      .game-container{
+        
+          justify-content: center;
+          width:100%;
+          margin:0;
+      grid-row: 0;
+      grid-column:0;
+          
+        
+      }
+      .game-info-container{
+          font-size: 13px;
+        /*flex-direction: column;
+        align-items: center;
+      } 
+      .page-title{
+          font-size: 50px;
+      }
+      .card{
+        height:30vh;
+        width:20vw;
+        padding:0;
+    
+
+       
+      }
+      .overlay-text{
+        font-size: 70px;
+      }
+      .start{
+          font-size:.4em;
+          margin:0 auto;
+
+      }
+  }
+
+
+
+  @media only screen and (max-width: 568px){
+    .game-container{
+        
+      justify-content: center;
+      width:100%;
+      margin:0;
+  grid-row: 0;
+  grid-column:0;}
+    .card{
+      height:75px;
+      width:75px;
+      padding:0;
+      margin:0;
+     
+    }
+    .page-title{
+      font-size: 40px;
+  }
+  .game-info{
+    font-size: 20px;
+    padding:10px;
+  /*flex-direction: column;
+  align-items: center;
+}
+
+  }
+  @media only screen and (max-width: 568px){
+    .game-container{
+        
+      justify-content: center;
+      width:100%;
+      margin:0;
+  grid-row: 0;
+  padding:0;
+  grid-column:0;}
+    .card{
+      width:22.5vw;
+      height:22.5vh;
+      padding:0;
+      margin:0;
+    }
+    .start{
+      font-size:.3em;
+      margin:0 auto;
+
+  }
+  } */
+  @media only screen and (max-width: 568px){
+    .game-container{
+      margin:0;
+      grid-gap:0;
+      min-width:100%;
+      overflow: auto;
+      height:auto;
+    
+    }
+    .card{
+      width:5.5rem;
+      height:5.6rem;
+      justify-self: center;
+      align-self: baseline;
+    }
+    .logo{
+      height:100%;height:100%;
+      object-fit: cover;
+      align-self: center;
+    }
+    .page-title{
+      font-size:2.4rem;
+    padding-top:8%;
+    }
+    .overlay-text{
+      width:100%;
+    }
+    .start{
+      font-size:2.7rem;
+      padding:2%;
+   
+    }
+    .overlay-text span{
+      font-size:2rem;
+    }
+    .game-info-container{
+   
+    justify-content: space-evenly;
+    }
+    .game-info{
+      font-size:2rem;
+    }
+    }
+    
